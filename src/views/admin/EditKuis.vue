@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md mx-auto mt-8">
+  <div class="max-w-md mx-auto mt-20 ">
     <form @submit.prevent="fetchData">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="kuis_id">ID Kuis:</label>
@@ -7,6 +7,7 @@
       </div>
       <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cari</button>
     </form>
+
     <div v-if="showForm">
       <!-- Form untuk mengedit kuis -->
       <form @submit.prevent="updateKuis">
@@ -31,13 +32,14 @@
           <input v-model="jawaban_d" id="answer_d" name="answer_d" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="correct_answer">Jawaban Benar (A/B/C/D):</label>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="correct_answer">Jawaban Yang Benar :</label>
           <input v-model="jawaban_benar" id="correct_answer" name="correct_answer" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
         <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" @click="deleteKuis">Hapus</button>
       </form>
     </div>
+
   </div>
 </template>
 
@@ -54,7 +56,8 @@ export default {
       jawaban_b: "",
       jawaban_c: "",
       jawaban_d: "",
-      jawaban_benar: ""
+      jawaban_benar: "",
+     
     };
   },
   methods: {
@@ -73,6 +76,7 @@ export default {
         this.jawaban_c = kuisData.jawaban_c;
         this.jawaban_d = kuisData.jawaban_d;
         this.jawaban_benar = kuisData.jawaban_benar;
+       
         this.showForm = true;
       } catch(error) {
         alert("Gagal mengambil data kuis");
@@ -86,20 +90,22 @@ export default {
         jawaban_b: this.jawaban_b,
         jawaban_c: this.jawaban_c,
         jawaban_d: this.jawaban_d,
-        jawaban_benar: this.jawaban_benar
+        jawaban_benar: this.jawaban_benar,
+        
       };
       try {
         const success = await this.$store.dispatch('kuis/updateKuis', kuisData);
         if (success) {
-          alert("Berhasil memperbarui kuis");
-          // Redirect atau lakukan tindakan lain setelah berhasil memperbarui
+          alert("Gagal memperbarui");
+         
         }
       } catch(error) {
-        alert("Gagal memperbarui kuis");
+        alert("Berhasil memperbarui kuis");
       }
     },
     async deleteKuis() {
       if (!this.kuis_id) {
+
         alert("Harap masukkan ID kuis");
         return;
       }
@@ -108,11 +114,11 @@ export default {
         const confirmDelete = confirm("Apakah Anda yakin ingin menghapus kuis ini?");
         if (confirmDelete) {
           await this.$store.dispatch('kuis/deleteKuis', this.kuis_id);
-          alert("Berhasil menghapus kuis");
-          // Redirect atau lakukan tindakan lain setelah berhasil menghapus
+          alert("Gagal Menghapus");
+          
         }
       } catch(error) {
-        alert("Gagal menghapus kuis");
+        alert("Berhasil menghapus kuis");
       }
     }
   }

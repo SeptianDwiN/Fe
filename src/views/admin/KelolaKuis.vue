@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-md mx-auto mt-8">
+    <div class="max-w-md mx-auto mt-20 ">
       <form @submit.prevent="addNewKuis">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="question">Pertanyaan:</label>
@@ -27,8 +27,13 @@
         </div>
         
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="correct_answer">Jawaban Benar (A/B/C/D):</label>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="correct_answer">Jawaban Benar:</label>
           <input v-model="jawaban_benar" id="correct_answer" name="correct_answer" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="correct_answer">Solusi Id:</label>
+          <input v-model="solusi_id" id="correct_answer" name="correct_answer" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
@@ -63,7 +68,8 @@
           jawaban_b: this.jawaban_b,
           jawaban_c: this.jawaban_c,
           jawaban_d: this.jawaban_d,
-          jawaban_benar: this.jawaban_benar
+          jawaban_benar: this.jawaban_benar,
+          solusi_id: this.solusi_id,
         };
         try {
             const success = await this.$store.dispatch('kuis/addKuis', kuisData);
@@ -75,7 +81,8 @@
                 this.jawaban_b,
                 this.jawaban_c,
                 this.jawaban_d,
-                this.jawaban_benar
+                this.jawaban_benar,
+                this.solusi_id
             }
         }catch(error) {
             alert("Failed")
@@ -85,9 +92,7 @@
         this.kuisData.splice(index, 1);
       },
       saveChanges() {
-        // Kirim data kuis ke Vuex untuk disimpan
         this.addKuis(this.kuisData).then(() => {
-          // Setelah berhasil menambahkan kuis, reset form
           this.kuisData = [
             {
               pertanyaan : "",
@@ -95,7 +100,8 @@
               jawaban_b: "",
               jawaban_c: "",
               jawaban_d: "",
-              jawaban_benar: ""
+              jawaban_benar: "",
+              solusi_id: "",
             }
           ];
         });

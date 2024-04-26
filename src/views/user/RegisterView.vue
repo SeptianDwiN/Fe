@@ -1,14 +1,11 @@
 <template>
   <div class="flex flex-wrap justify-center py-12 bg-gradient-to-r from-blue-400 to-purple-500">
-    <!-- Konten untuk gambar latar belakang -->
     <div class="hidden md:flex md:w-5/12 lg:w-6/12 mx-4 my-8 md:my-0 md:mx-0">
       <div class="relative w-full h-screen">
         <img class="absolute top-0 h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1565301660306-29e08751cc53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
       </div>
     </div>
-    <!-- /Konten untuk gambar latar belakang -->
 
-    <!-- Konten untuk register -->
     <div class="flex flex-col w-full md:w-5/12 lg:w-4/12 bg-white rounded-lg shadow-lg mx-4 my-8 md:my-0 md:mx-0">
       <div class="lg:w-72 mx-auto my-auto pt-8 md:pt-0 md:px-6">
         <p class="text-3xl font-bold text-center md:text-left text-gray-900">Register.</p>
@@ -20,12 +17,17 @@
           </div>
           <div class="flex flex-col pt-4">
             <div class="focus-within:border-b-2 focus-within:border-blue-500 relative flex overflow-hidden border-b-2 transition">
-              <input type="email" id="register-email" v-model="form.email" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" />
+              <input type="email" id="register-emai l" v-model="form.email" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" />
             </div>
           </div>
           <div class="mb-12 flex flex-col pt-4">
             <div class="focus-within:border-b-2 focus-within:border-blue-500 relative flex overflow-hidden border-b-2 transition">
               <input type="password" id="register-password" v-model="form.password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
+            </div>
+          </div>
+          <div class="mb-12 flex flex-col pt-4">
+            <div class="focus-within:border-b-2 focus-within:border-blue-500 relative flex overflow-hidden border-b-2 transition">
+              <input type="text" id="register-role" v-model="form.role" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Role" />
             </div>
           </div>
           <button type="submit" class="w-full rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">Register</button>
@@ -38,7 +40,6 @@
         </div>
       </div>
     </div>
-    <!-- /Konten untuk login -->
   </div>
 </template>
 
@@ -51,7 +52,8 @@ export default {
       form: {
         username: "",
         email: "",
-        password: ""
+        password: "",
+        role: "",
       }
     };
   },
@@ -64,7 +66,8 @@ export default {
       const credentials = {
         username: this.form.username,
         email: this.form.email,
-        password: this.form.password
+        password: this.form.password,
+        role: this.form.role,
       };
 
       const success = await this.register(credentials);

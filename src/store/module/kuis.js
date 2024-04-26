@@ -19,6 +19,7 @@ const kuis = {
                 alert("Terjadi kesalahan saat mengambil data kuis.");
             }
         },
+
         async addKuis({ commit }, kuisData) {
             try {
               const response = await axios.post("http://localhost:3000/api/v1/kuis", kuisData);
@@ -29,6 +30,7 @@ const kuis = {
               alert("Terjadi kesalahan saat menambahkan kuis.");
             }
           },
+          
           async fetchKuisById({ commit }, kuisId) {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/kuis/${kuisId}`);

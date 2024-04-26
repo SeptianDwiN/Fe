@@ -1,7 +1,7 @@
 <template>
   <div id="navigation" class=" w-full bg-gray-800">
   <ul id="desktop-nav" class="hidden md:flex  ">
-    <img src="../assets/img/stfi.png" alt="" width="80">
+    <img src="" alt="" width="80">
 
     <li class="relativer">
       <a href="/" class="block px-6 py-4 text-sm font-semibold text-white hover:bg-blue-600 hover:text-white">Home</a>
